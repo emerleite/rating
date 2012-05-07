@@ -1,26 +1,29 @@
 var Ratings = require('app/models/ratings');
-
 module.exports = {
   handle: function(app) {
     app.post(/^\/([^:]+)/, Rating.create);
-    app.get('/', function(req, res){
-      res.send('hello world');
-    });
+    app.get(/^\/([^:]+)/, Rating.show);
   }
 };
 
 var Rating = {
   create: function(req, res) {
     var slug = req.params[0].split('/').join(':');
-    var rating = Ratings.build({slug: slug});
-    console.log('slug:' + slug);
+    var data = req.body;
+    data.slug = slug;
 
+    if (!data.rating) return res.send('invalid json', {}, 400);
+
+    var rating = Ratings.build(data);
     rating.save(function(err) {
-      if (!err) {
-        res.send(200);
-      } else {
-        res.send(400);
-      }
+      if (err) return res.send(err.message, {}, 500);
+      return res.send(200);
+    });
+  },
+  show: function(req, res) {
+    var slug = req.params[0].split('/').join(':');
+    Ratings.find(slug, function(err, rating) {
+      return res.json({count: rating.count(), average: rating.average()});
     });
   }
 };
