@@ -1,0 +1,31 @@
+{
+  "author": "Emerson Macedo <emerleite@gmail.com> (http://codificando.com)",
+  "name": "rating",
+  "description": "Node.JS Rating system",
+  "version": "0.0.1",
+  "homepage": "http://github.com/emerleite/rating",
+  "repository": {
+    "url": "git://github.com/emerleite/rating.git"
+  },
+  "dependencies": {
+    "express": "*",
+    "redis" : "*",
+    "hiredis": "*"
+  },
+  "devDependencies": {
+    "mocha" : "*",
+    "should" : "*",
+    "sinon" : "*",
+    "request" : "*",
+    "database-cleaner" : "*"
+  },
+  "optionalDependencies": {},
+  "scripts": {
+    "test": "NODE_PATH=. node_modules/mocha/bin/mocha -R spec ./test/**/*.js",
+    "start": "NODE_PATH=. node boot.js"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "private": true
+}
