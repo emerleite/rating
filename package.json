@@ -22,7 +22,7 @@
   "optionalDependencies": {},
   "scripts": {
     "test": "NODE_PATH=. node_modules/mocha/bin/mocha -R spec ./test/**/*.js",
-    "start": "NODE_PATH=. node boot.js"
+    "start": "NODE_PATH=. node index.js"
   },
   "engines": {
     "node": "*"
